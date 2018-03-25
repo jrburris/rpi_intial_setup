@@ -13,13 +13,9 @@ remove_file_list = ['libreoffice*', 'wolfram-engine', 'sonic-pi', 'scratch',
 
 # Update and Upgrade
 print('Peforming Update')
-proc = subprocess.Popen('sudo apt-get update -y', shell=True, stdin=None,
-                        stdout=open(os.devnull, "wb"), stderr=STDOUT,
-                        executable="/bin/bash").wait()
+proc = subprocess.Popen('sudo apt-get update -y', shell=True)
 print('Peforming Upgrade')
-proc = subprocess.Popen('sudo apt-get upgrade -y', shell=True, stdin=None,
-                        stdout=open(os.devnull, "wb"), stderr=STDOUT,
-                        executable="/bin/bash").wait()
+proc = subprocess.Popen('sudo apt-get upgrade -y', shell=True)
 
 print('Unistalling unwanted files')
 
