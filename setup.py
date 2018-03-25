@@ -5,7 +5,7 @@ import shutil
 from subprocess import STDOUT
 
 
-remove_file_list = ['libreoffice *', 'wolfram-engine', 'sonic-pi', 'scratch',
+remove_file_list = ['libreoffice*', 'wolfram-engine', 'sonic-pi', 'scratch',
                     'python-minecraftpi', 'minecraft-pi', 'scratch2', 'geany',
                     'geany-common', 'greenfoot', 'nodered', 'bluej',
                     'claws-mail', 'claws-mail-i18n', 'nuscratch',
@@ -44,6 +44,13 @@ proc = subprocess.Popen('sudo apt-get clean',
 proc.wait()
 
 proc = subprocess.Popen('sudo apt-get autoremove --purge',
+                        shell=True, stdin=None,
+                        stdout=open("/dev/null", "w"),
+                        stderr=None, executable="/bin/bash").communicate()
+proc.wait()
+
+
+proc = subprocess.Popen('sudo apt-get install netatalk -y',
                         shell=True, stdin=None,
                         stdout=open("/dev/null", "w"),
                         stderr=None, executable="/bin/bash").communicate()
