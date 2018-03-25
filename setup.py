@@ -15,46 +15,40 @@ remove_file_list = ['libreoffice*', 'wolfram-engine', 'sonic-pi', 'scratch',
 print('Peforming Update')
 proc = subprocess.Popen('sudo apt-get update -y', shell=True, stdin=None,
                         stdout=open(os.devnull, "wb"), stderr=STDOUT,
-                        executable="/bin/bash").communicate()
-proc.wait()
+                        executable="/bin/bash").wait()
 print('Peforming Upgrade')
 proc = subprocess.Popen('sudo apt-get upgrade -y', shell=True, stdin=None,
                         stdout=open(os.devnull, "wb"), stderr=STDOUT,
-                        executable="/bin/bash").communicate()
-proc.wait()
+                        executable="/bin/bash").wait()
 
 print('Unistalling unwanted files')
 
 for remove_file in remove_file_list:
     print('     Removing {}'.format(remove_file))
-    proc = subprocess.Popen('apt-get remove --purge -y FILE',
+    proc = subprocess.Popen('apt-get remove --purge -y {}'.format(remove_file),
                             shell=True,
                             stdin=None,
                             stdout=open(os.devnull, "wb"),
                             stderr=STDOUT,
-                            executable="/bin/bash").communicate()
-    proc.wait()
+                            executable="/bin/bash").wait()
 
 
 print('Cleaning up deleted files')
 proc = subprocess.Popen('sudo apt-get clean',
                         shell=True, stdin=None,
                         stdout=open("/dev/null", "w"),
-                        stderr=None, executable="/bin/bash").communicate()
-proc.wait()
+                        stderr=None, executable="/bin/bash").wait()
 
 proc = subprocess.Popen('sudo apt-get autoremove --purge',
                         shell=True, stdin=None,
                         stdout=open("/dev/null", "w"),
-                        stderr=None, executable="/bin/bash").communicate()
-proc.wait()
+                        stderr=None, executable="/bin/bash").wait()
 
 
 proc = subprocess.Popen('sudo apt-get install netatalk -y',
                         shell=True, stdin=None,
                         stdout=open("/dev/null", "w"),
-                        stderr=None, executable="/bin/bash").communicate()
-proc.wait()
+                        stderr=None, executable="/bin/bash").wait()
 
 print('Removing games')
 dest = '~/python_games'
