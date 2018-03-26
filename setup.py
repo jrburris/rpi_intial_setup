@@ -1,4 +1,3 @@
-# from subprocess import STDOUT, check_call
 import subprocess
 import shutil
 
@@ -9,28 +8,52 @@ remove_file_list = ['libreoffice*', 'wolfram-engine', 'sonic-pi', 'scratch',
                     'claws-mail', 'claws-mail-i18n', 'nuscratch',
                     'python3-thonny']
 
-
-print('Unistalling unwanted files')
-
-for remove_file in remove_file_list:
-    print('     Removing {}'.format(remove_file))
-    proc = subprocess.Popen('apt-get remove --purge -y {}'.format(remove_file),
-                            shell=True)
+add_app_list = ['netatalk']
 
 
-print('Cleaning up deleted files')
-proc = subprocess.Popen('sudo apt-get clean',
-                        shell=True)
-
-proc = subprocess.Popen('sudo apt-get autoremove --purge',
-                        shell=True)
+def update():
+    print('Starting Update')
+    subprocess.call("sudo apt-get update", shell=True)
+    print('Update Complete')
 
 
-proc = subprocess.Popen('sudo apt-get install netatalk -y',
-                        shell=True)
+def upgrade():
+    print('Starting Upgrade')
+    subprocess.call("sudo apt-get upgrade -y", shell=True)
+    print('Upgrade Complete')
 
-print('Removing games')
-dest = '~/python_games'
-shutil.rmtree(dest, ignore_errors=True)
 
-print('Done!')
+def remove():
+    print('Starting Removal')
+    for remove_file in remove_file_list:
+        print('Removing {}'.format(remove_file))
+        subprocess.call("sudo apt-get remove --purge -y {}".
+                        format(remove_file), shell=True)
+
+    print('Running Clean')
+    subprocess.call("sudo apt-get clean", shell=True)
+
+    print('Running Autoremove')
+    subprocess.call("sudo apt autoremove --purge -y", shell=True)
+
+    print('Removing Games')
+    dest = '~/python_games'
+    shutil.rmtree(dest, ignore_errors=True)
+
+    print('Removal Complete')
+
+
+def install():
+    print('Starting Installs')
+    for add_app in add_app_list:
+        print('Installing {}'.format(add_app))
+        subprocess.call('sudo apt-get install {} -y'.
+                        format(add_app), shell=True)
+
+    print('Installs Complete')
+
+
+update()
+upgrade()
+remove()
+install()
