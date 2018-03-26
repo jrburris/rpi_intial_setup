@@ -1,5 +1,9 @@
 # rpi_intial_setup
 
+sudo apt-get install python-apt
+
+
+
 
 python setup.py
 

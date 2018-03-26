@@ -1,8 +1,13 @@
-import apt
+import subprocess
 
-cache = apt.Cache()
-cache.update()
-cache.open(None)
-cache.upgrade()
-for pkg in cache.getChanges():
-    print pkg.sourcePackageName, pkg.isUpgradeable
+def update():
+     print('Starting Update')
+     subprocess.call("sudo apt-get update", shell=True)
+     print('Update Complete')
+def upgrade():
+     print('Starting Upgrade')
+     subprocess.call("sudo apt-get upgrade -y", shell=True)
+     print('Upgrade Complete')
+
+update()
+upgrade()
