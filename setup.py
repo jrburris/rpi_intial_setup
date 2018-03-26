@@ -1,8 +1,6 @@
 # from subprocess import STDOUT, check_call
-import os
 import subprocess
 import shutil
-from subprocess import STDOUT
 
 
 remove_file_list = ['libreoffice*', 'wolfram-engine', 'sonic-pi', 'scratch',
@@ -11,11 +9,6 @@ remove_file_list = ['libreoffice*', 'wolfram-engine', 'sonic-pi', 'scratch',
                     'claws-mail', 'claws-mail-i18n', 'nuscratch',
                     'python3-thonny']
 
-# Update and Upgrade
-print('Peforming Update')
-proc = subprocess.Popen('sudo apt-get update -y', shell=True)
-print('Peforming Upgrade')
-proc = subprocess.Popen('sudo apt-get upgrade -y', shell=True)
 
 print('Unistalling unwanted files')
 
